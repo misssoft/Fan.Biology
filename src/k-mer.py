@@ -1,3 +1,13 @@
+# Input:  Two strings, Pattern and Genome
+# Output: A list containing all starting positions where Pattern appears as a substring of Genome
+def PatternMatching(pattern, genome):
+    positions = [] # output variable
+    # your code here
+    for i in range(len(genome)-len(pattern)+1):
+        if genome[i:i+len(pattern)] == pattern:
+            positions.append(i)
+    return positions
+
 '''
 Input:  Strings Pattern and Text
 Output: The number of times Pattern appears in Text
@@ -53,5 +63,8 @@ if __name__ == '__main__':
     target ='TGATCA'
     gene =str('ATCAATGATCAACGTAAGCTTCTAAGCATGATCAAGGTGCTCACACAGTTTATCCACAACCTGAGTGGATGACATCAAGATAGGTCGTTGTATCTCCTTCCTCTCGTACTCTCATGACCACGGAAAGATGATCAAGAGAGGATGATTTCTTGGCCATATCGCAATGAATACTTGTGACTTGTGCTTCCAATTGACATCTTCAGCGCCATATTGCGCTGGCCAAGGTGACGGAGCGGGATTACGAAAGCATGATCATGGCTGTTGTTCTGTTTATCTTGTTTTGACTGAGACTTGTTAGGATAGACGGTTTTTCATCACTGACTAGCCAAAGCCTTACTCTGCCTGACATCGACCGTAAATTGATAATGAATTTACATGCTTCCGCGACGATTTACCTCTTGATCATCGATCCGATTGAAGATCTTCAATTGTTAATTCTCTTGCCTCGACTCATAGCCATGATGAGCTCTTGATCATGTTTCCTTAACCCTCTATTTTTTACGGAAGAATGATCAAGCTGCTGCTCTTGATCATCGTTTC')
     print(PatternCount(target, gene))
-    print (CountDict(gene,10))
+    #print (CountDict(gene,10))
     print (FrequentWords(gene,10))
+    print(PatternCount("TGT", "ACTGTACGATGATGTGTGTCAAAG"))
+    print(PatternMatching('ATAT','GATATATGCATATACTT'))
+    print(FrequentWords("TAAACGTGAGAGAAACGTGCTGATTACACTTGTTCGTGTGGTAT",3))
