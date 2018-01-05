@@ -14,6 +14,23 @@ def Count(Motifs):
             count[symbol][j] += 1
     return count
 
+# Input:  A set of kmers Motifs
+# Output: CountWithPseudocounts(Motifs)
+def CountWithPseudocounts_Worked(Motifs):
+    count = Count(Motifs)
+    k = len(Motifs[0])
+    t = len(Motifs)
+    for symbol in "ACGT":
+        counts = count[symbol]
+        newcounts = []
+        for j in counts:
+            jplus = j + 1
+            newcounts.append(jplus)
+        count[symbol] = newcounts
+    return count
+            
+    # insert your code here
+
 # Input:  A list of kmers Motifs
 # Output: the profile matrix of Motifs, as a dictionary of lists.
 def Profile(Motifs):
@@ -78,7 +95,7 @@ def ProfileMostProbablePattern(Text, k, Profile):
     length = len(Text)
     count = -1
     result = Text[0:k]
-    for i in range(length - k):
+    for i in range(length - k + 1):
         motif = Text[i:i+k]
         probability = Pr(motif, Profile)
         #print("motif:" + motif + "prob: " + str(probability) )
@@ -95,7 +112,7 @@ def GreedyMotifSearch(Dna, k, t):
     for i in range(0, t):
         BestMotifs.append(Dna[i][0:k])
     n = len(Dna[0])
-    for i in range(n-k):
+    for i in range(n-k+1):
         Motifs = []
         Motifs.append(Dna[0][i:i+k])
         for j in range(1, t):
@@ -105,11 +122,20 @@ def GreedyMotifSearch(Dna, k, t):
             BestMotifs = Motifs
     return BestMotifs
 
+# Input:  A profile matrix Profile and a list of strings Dna
+# Output: Motifs(Profile, Dna)
+def Motifs(Profile, Dna):
+    result =  ProfileMostProbablePattern(Dna,4,Profile)
+    return result
+
 
 if __name__ == '__main__':
-    # motifs = ['AACGTA','CCCGTT','CACCTT','GGATTA','TTCCGG']
+    #motifs = ['AACGTA','CCCGTT','CACCTT','GGATTA','TTCCGG']
     # print(Count(motifs))
+    #print(CountWithPseudocounts(motifs))
     # print(Profile(motifs))
+    #testmotifs = ['GTACAACTGT','CAACTATGAA','TCCTACAGGA','AAGCAAGGGT','GCGTACGACC','TCGTCAGCGT','AACAAGGTCA','CTCAGGCGTC','GGATCCAGGT','GGCAAGTACC']
+    #print(ProfileWithPseudocounts(testmotifs))
     # print(Consensus(motifs))
     # print(Score(motifs))
     # profile = {'A':[0.2,0.2,0.0,0.0,0.0,0.0,0.9,0.1,0.1,0.1,0.3,0.0],
@@ -126,9 +152,6 @@ if __name__ == '__main__':
     # testProfile = {'A':A, 'C':C, 'G':G, 'T':T}
     # print(ProfileMostProbablePattern(testText,5,testProfile))
 
-    #Dna = ['GGCGTTCAGGCA','AAGAATCAGTCA','CAAGGAGTTCGC','CACGTCAATCAC','CAATAATATTCG']
-    #print(GreedyMotifSearch(Dna,3,5))
-
     #DnaTest = ['GCAGGTTAATACCGCGGATCAGCTGAGAAACCGGAATGTGCGT','CCTGCATGCCCGGTTTGAGGAACATCAGCGAAGAACTGTGCGT','GCGCCAGTAACCCGTGCCAGTCAGGTTAATGGCAGTAACATTT','AACCCGTGCCAGTCAGGTTAATGGCAGTAACATTTATGCCTTC','ATGCCTTCCGCGCCAATTGTTCGTATCGTCGCCACTTCGAGTG']
     #print(GreedyMotifSearch(DnaTest,6,5))
 
@@ -140,4 +163,16 @@ if __name__ == '__main__':
            'G':[0.1, 0.3, 1.0, 0.1, 0.5, 0.0],
            'T':[0.3, 0.1, 0.0, 0.4, 0.5, 0.0]}
     print(Pr('GAGCTA',profile))
+
+    # profile = {
+    #     'A':[0.8 ,0.0, 0.0, 0.2],
+    #     'C':[0.0 ,0.6, 0.2, 0.0],
+    #     'G':[0.2 ,0.2, 0.8, 0.0],
+    #     'T':[0.0 ,0.2, 0.0, 0.8]
+    # }
+    # Dna_input = ['TTACCTTAAC','GATGTCTGTC','ACGGCGTTAG','CCCTAACGAG','CGTCAGAGGT']
+
+    #print(Motifs(profile,Dna_input))
+
+
 
