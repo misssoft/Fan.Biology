@@ -68,6 +68,104 @@ class TestMostProbable(unittest.TestCase):
         result = mostprobable.ProfileMostProbablePattern(dna, k, profile)
         self.assertEqual(result, 'CAGCG')
 
+    def test_motif_sample_dataset(self):
+        profile = {
+            'A': [0.8,0.0,0.0,0.2],
+            'C': [0.0,0.6,0.2,0.0],
+            'G': [0.2,0.2,0.8,0.0],
+            'T': [0.0,0.2,0.0,0.8]
+        }
+        dna = [
+            'TTACCTTAAC',
+            'GATGTCTGTC',
+            'ACGGCGTTAG',
+            'CCCTAACGAG',
+            'CGTCAGAGGT'
+        ]
+        output = [
+            'ACCT',
+            'ATGT',
+            'GCGT',
+            'ACGA',
+            'AGGT'
+        ]
+        result = mostprobable.Motifs(profile,dna)
+        self.assertEqual(output,result)
+
+    def test_motif_full_dataset(self):
+        profile = {
+            'A': [0.5,0.0,0.2,0.2],
+            'C': [0.3,0.6,0.2,0.0],
+            'G': [0.2,0.2,0.6,0.0],
+            'T': [0.0,0.2,0.0,0.8,]
+        }
+        dna = [
+            'TTACCTTAAC',
+            'GATGTCTGTC',
+            'ACGGCGTTAG',
+            'CCCTAACGAG',
+            'CGTCAGAGGT'
+        ]
+        output = [
+            'ACCT',
+            'ATGT',
+            'GCGT',
+            'ACGA',
+            'AGGT'
+        ]
+        result = mostprobable.Motifs(profile,dna)
+        self.assertEqual(output,result)
+
+    def test_RandomMotifs(self):
+        k = 3
+        t = 5
+        dna = [
+            'TTACCTTAAC',
+            'GATGTCTGTC',
+            'ACGGCGTTAG',
+            'CCCTAACGAG',
+            'CGTCAGAGGT'
+        ]
+        result = mostprobable.RandomMotifs(dna,k,t)
+        self.assertEqual(len(result[0]),k)
+
+    def test_RepeatedRandomizedMotifSearch(self):
+        dna =[
+            'CGCCCCTCTCGGGGGTGTTCAGTAAACGGCCA',
+            'GGGCGAGGTATGTGTAAGTGCCAAGGTGCCAG',
+            'TAGTACCGAGACCGAAAGAAGTATACAGGCGT',
+            'TAGATCAAGTTTCAGGTGCACGTCGGTGAACC',
+            'AATCCACCAGCTCCACGTGCAATGTTGGCCTA'
+        ]
+        k = 8
+        t = 5
+        output = [
+            'AACGGCCA',
+            'AAGTGCCA',
+            'TAGTACCG',
+            'AAGTTTCA',
+            'ACGTGCAA'
+
+        ]
+        result = mostprobable.RepeatedRandomizedMotifSearch(dna,k,t)
+        self.assertEqual(output,result)
+
+    def test_Motif(self):
+        dna =[
+            'AAGCCAAA',
+            'AATCCTGG',
+            'GCTACTTG',
+            'ATGTTTTG'
+        ]
+        motif =[
+            'CCA',
+            'CCT',
+            'CTT',
+            'TTG'
+            ]
+        profile = mostprobable.ProfileWithPseudocounts(motif)
+        result = mostprobable.Motifs(profile,dna)
+        self.assertEqual( ['CCA', 'CCT', 'CTT', 'TTT'], result)
 
 if __name__ == '__main__':
     unittest.main()

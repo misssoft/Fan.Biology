@@ -49,3 +49,8 @@ def ProfileGeneratedString(Text, profile, k):
     probabilities = Normalize(probabilities)
     return WeightedDie(probabilities)
 
+if __name__ == '__main__':
+    input = {'A':0.45, 'C':0.63, 'G':0.09, 'T': 0.27,'N': 0.36}
+    output = Normalize(input)
+    print(output)
+
