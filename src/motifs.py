@@ -122,57 +122,14 @@ def GreedyMotifSearch(Dna, k, t):
             BestMotifs = Motifs
     return BestMotifs
 
-# Input:  A profile matrix Profile and a list of strings Dna
-# Output: Motifs(Profile, Dna)
-def Motifs(Profile, Dna):
-    result =  ProfileMostProbablePattern(Dna,4,Profile)
-    return result
-
 
 if __name__ == '__main__':
-    #motifs = ['AACGTA','CCCGTT','CACCTT','GGATTA','TTCCGG']
-    # print(Count(motifs))
-    #print(CountWithPseudocounts(motifs))
-    # print(Profile(motifs))
-    #testmotifs = ['GTACAACTGT','CAACTATGAA','TCCTACAGGA','AAGCAAGGGT','GCGTACGACC','TCGTCAGCGT','AACAAGGTCA','CTCAGGCGTC','GGATCCAGGT','GGCAAGTACC']
-    #print(ProfileWithPseudocounts(testmotifs))
-    # print(Consensus(motifs))
-    # print(Score(motifs))
-    # profile = {'A':[0.2,0.2,0.0,0.0,0.0,0.0,0.9,0.1,0.1,0.1,0.3,0.0],
-    #            'C':[0.1,0.6,0.0,0.0,0.0,0.0,0.0,0.4,0.1,0.2,0.4,0.6],
-    #            'G':[0.0,0.0,1.0,1.0,0.9,0.9,0.1,0.0,0.0,0.0,0.0,0.0],
-    #            'T':[0.7,0.2,0.0,0.0,0.1,0.1,0,0.5,0.8,0.7,0.3,0.4]}
-    # print(Pr('ACGGGGATTACC',profile))
-    # testText="ACCTGTTTATTGCCTAAGTTCCGAACAAACCCAATATAGCCCGAGGGCCT"
-    # k=5
-    # A = [0.2, 0.2, 0.3, 0.2, 0.3]
-    # C = [0.4, 0.3, 0.1, 0.5, 0.1]
-    # G = [0.3, 0.3, 0.5, 0.2, 0.4]
-    # T = [0.1, 0.2, 0.1, 0.1, 0.2]
-    # testProfile = {'A':A, 'C':C, 'G':G, 'T':T}
-    # print(ProfileMostProbablePattern(testText,5,testProfile))
-
-    #DnaTest = ['GCAGGTTAATACCGCGGATCAGCTGAGAAACCGGAATGTGCGT','CCTGCATGCCCGGTTTGAGGAACATCAGCGAAGAACTGTGCGT','GCGCCAGTAACCCGTGCCAGTCAGGTTAATGGCAGTAACATTT','AACCCGTGCCAGTCAGGTTAATGGCAGTAACATTTATGCCTTC','ATGCCTTCCGCGCCAATTGTTCGTATCGTCGCCACTTCGAGTG']
-    #print(GreedyMotifSearch(DnaTest,6,5))
-
-    #DnaTest = ['GGCGTTCAGGCA','AAGAATCAGTCA','CAAGGAGTTCGC','CACGTCAATCAC','CAATAATATTCG']
-    #print(GreedyMotifSearch(DnaTest,3,5))
-
-    profile = {'A':[0.4, 0.3, 0.0, 0.1, 0.0, 0.9],
-           'C':[0.2, 0.3, 0.0, 0.4, 0.0, 0.1],
-           'G':[0.1, 0.3, 1.0, 0.1, 0.5, 0.0],
-           'T':[0.3, 0.1, 0.0, 0.4, 0.5, 0.0]}
-    print(Pr('GAGCTA',profile))
-
-    # profile = {
-    #     'A':[0.8 ,0.0, 0.0, 0.2],
-    #     'C':[0.0 ,0.6, 0.2, 0.0],
-    #     'G':[0.2 ,0.2, 0.8, 0.0],
-    #     'T':[0.0 ,0.2, 0.0, 0.8]
-    # }
-    # Dna_input = ['TTACCTTAAC','GATGTCTGTC','ACGGCGTTAG','CCCTAACGAG','CGTCAGAGGT']
-
-    #print(Motifs(profile,Dna_input))
+    DnaTest = ['GCAGGTTAATACCGCGGATCAGCTGAGAAACCGGAATGTGCGT',
+               'CCTGCATGCCCGGTTTGAGGAACATCAGCGAAGAACTGTGCGT',
+               'GCGCCAGTAACCCGTGCCAGTCAGGTTAATGGCAGTAACATTT',
+               'AACCCGTGCCAGTCAGGTTAATGGCAGTAACATTTATGCCTTC',
+               'ATGCCTTCCGCGCCAATTGTTCGTATCGTCGCCACTTCGAGTG']
+    print(GreedyMotifSearch(DnaTest,6,5))
 
 
 
