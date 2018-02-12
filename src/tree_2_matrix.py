@@ -51,9 +51,19 @@ def get_weight_of_path(weighed_graph, path):
 if __name__ == '__main__':
     count, paths, weighed_path = read_path_to_dictionary('E:\\Share\\Code\\Fan.Biology\\tests\\dataset_10328_12.txt')
     print(count, paths, weighed_path)
-    found_path = find_path(paths,0,1)
-    path_weight = get_weight_of_path(weighed_path,found_path)
-    print(path_weight)
+    dict_matrix = {}
+    matrix =[]
+    for i in range(count):
+        dict_matrix[i] = []
+        matrix_row=[]
+        for j in range(count):
+            found_path = find_path(paths,i,j)
+            path_weight = get_weight_of_path(weighed_path, found_path)
+            dict_matrix[i].append({j:path_weight})
+            matrix_row.append(path_weight)
+        matrix.append(matrix_row)
+    print(dict_matrix)
+    print(matrix)
 
 
 
